@@ -62,17 +62,33 @@ def autenticar(user, password):
         # Valido si la contraseñia es correcta
         if contrasenia == password:
             print("Usted pudo ingresar a la plataforma")
+            
+            # Cierro las conexiones
+            conexion_mysql.close()
+            cursor.close()
+            
+            return True
         
         else:
-            print("Usuario o contraseñia invalida.")        
+            print("Usuario o contraseñia invalida.")
+
+            # Cierro las conexiones
+            conexion_mysql.close()
+            cursor.close()
+            
+            return False        
 
     else:
         print("Usuario o contraseñia invalida.")
+
+        # Cierro las conexiones
+        conexion_mysql.close()
+        cursor.close()
+        
+        return False
     
     
-    # Cierro las conexiones
-    conexion_mysql.close()
-    cursor.close()
+    
 
 
 

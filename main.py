@@ -1,11 +1,11 @@
 # Programa principal
-from services.crud import *
-from login import login
+import login_menu
+
 
 
 print("-- Iniciando programa ---")
 
-#testDB()
-#autenticar(user = "admin1", password = "adminpass1111")
+#Ingreso al menu de login
+login_menu()
 
 print("-- Finalizando programa ---")
