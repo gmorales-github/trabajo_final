@@ -35,6 +35,47 @@ def testDB():
 
 
 
+def autenticar(user, password):
+    '''Realiza el proceso de autenticación en la plataforma.
+    Debe ingresar los parametros user y password'''
+    # Realizó la conexión con la DB según los datos de configuración
+    conexion_mysql = conexionDB(USER_DB_SERVER, PASSWORD_DB_SERVER, IP_DB_SERVER, DB_SCHEMA)
+
+    # creo el cursor
+    cursor = conexion_mysql.cursor()
+
+    # Generó un query para validar el ingreso a la plataforma
+    auth_query = AUTH_QUERY + " " + "\"" + user + "\"" 
+    
+    # Ejecuto el query indicado
+    cursor.execute(auth_query)
+    
+    # Guardo los resultados del query
+    user_data = cursor.fetchall()
+
+    # Vaĺido si el usuario existe en caso de no existir no se continua con las validaciones
+    if user_data:
+        # Extraigo el valor de la contraseñia y el valor del campo admin
+        for data in user_data:            
+            contrasenia, admin_valor = data
+
+        # Valido si la contraseñia es correcta
+        if contrasenia == password:
+            print("Usted pudo ingresar a la plataforma")
+        
+        else:
+            print("Usuario o contraseñia invalida.")        
+
+    else:
+        print("Usuario o contraseñia invalida.")
+    
+    
+    # Cierro las conexiones
+    conexion_mysql.close()
+    cursor.close()
+
+
+
 def listar_productos(cursor):
     query = "SELECT * FROM clientes"
     cursor.execute(query)

@@ -1,12 +1,13 @@
 # constantes
 ### DB CONFIGURATION ###
-#IP_DB_SERVER = "localhost"
-IP_DB_SERVER = "192.168.0.83"
+IP_DB_SERVER = "localhost"
 PORT_DB_SERVER = 3306
 USER_DB_SERVER = "root"
-PASSWORD_DB_SERVER = ""
+PASSWORD_DB_SERVER = "123456"
+DB_SCHEMA = "dbtienda"
 #DB_SCHEMA = "salesstore"
-DB_SCHEMA = "dbclientes"
 
-### QUERIES ###
-TEST_QUERY = "SELECT * FROM clientes"
+
+### QUERIES CONFIGURATION ###
+TEST_QUERY = "SELECT * FROM Usuarios"
+AUTH_QUERY = "SELECT contrasenia, admin FROM usuarios WHERE apodo = "
