@@ -1,5 +1,5 @@
 from services.crud import autenticar
-from main_menu import main_menu
+from gui.main_menu import main_menu
 import tkinter as tk
 from tkinter import messagebox
 
