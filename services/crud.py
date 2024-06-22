@@ -92,11 +92,21 @@ def autenticar(user, password):
 
 
 
-def listar_productos(cursor):
-    query = "SELECT * FROM clientes"
-    cursor.execute(query)
-    result = cursor.fetchall()
-    if result:
-        return result
-    else:
-        return "No hay productos cargados."
+def listar_productos():
+    '''Método para obtener todos los registros de la tabla productos.'''
+    # Realizó la conexión con la DB según los datos de configuración
+    conexion_mysql = conexionDB(USER_DB_SERVER, PASSWORD_DB_SERVER, IP_DB_SERVER, DB_SCHEMA)
+
+    # creo el cursor
+    cursor = conexion_mysql.cursor()
+
+    # Generó un query para validar el ingreso a la plataforma
+    auth_query =  PRODUCTOS_QUERY 
+    
+    # Ejecuto el query indicado
+    cursor.execute(auth_query)
+    
+    # Guardo los resultados del query
+    productos_data = cursor.fetchall()
+
+    return productos_data

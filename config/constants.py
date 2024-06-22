@@ -11,3 +11,4 @@ DB_SCHEMA = "dbtienda"
 ### QUERIES CONFIGURATION ###
 TEST_QUERY = "SELECT * FROM Usuarios"
 AUTH_QUERY = "SELECT contrasenia, admin FROM usuarios WHERE nombre_usuario = "
+PRODUCTOS_QUERY = "SELECT * FROM productos"
