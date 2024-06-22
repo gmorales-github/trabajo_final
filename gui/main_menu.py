@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from services.crud import listar_productos
+from services.crud import delete_producto
 
 
 def refresh_table(tv):
@@ -16,21 +17,28 @@ def refresh_table(tv):
     for producto in productos:
         tv.insert('', tk.END, values=producto)
 
-def get_id(tv, window):
-    '''Tomo el id_producto del elemento seleccionado en la lista de la tabla.'''
-    
+def get_id(tv):
+    '''Tomo el id_producto del elemento seleccionado en la lista de la tabla.'''    
     seleccion = tv.selection()
     item = seleccion[0]
     item_values = tv.item(item, 'values')
     id = item_values[0]
-    print(id)
-    
-    # Elimino el gestor de productos para luego poder volver a actualizar los datos    
-    window.destroy()
-    main_menu()
-
     return id
-        
+
+
+
+def delete(tv):
+    '''Método para eliminar el registro seleccionado.'''
+    # Invoco al método para obtener el id
+    id = get_id(tv=tv)
+    
+    #Invoco al método para eliminar el producto por id_producto
+    delete_producto(id_producto=id)
+
+    # Invoco al método refresh para actualizar los datos de la tabla
+    refresh_table(tv=tv)
+
+
 
 def main_menu():
     # Obtengo la lista de todos los productos
@@ -65,15 +73,15 @@ def main_menu():
     tv.grid(row=0, column=2, padx=10, pady=10)
     
     # Botón para agregar un nuevo producto
-    btn_leer = tk.Button(window, text="Nuevo", command=lambda: get_id(tv, window))
+    btn_leer = tk.Button(window, text="Nuevo", command=lambda: get_id(tv))
     btn_leer.grid(row=1, column=2, pady=10)
     
     # Botón para editar el registro seleccionado
-    btn_leer = tk.Button(window, text="Editar", command=lambda: get_id(tv, window))
+    btn_leer = tk.Button(window, text="Editar", command=lambda: get_id(tv))
     btn_leer.grid(row=2, column=2, pady=10)
     
     # Botón para eliminar el registro seleccionado
-    btn_leer = tk.Button(window, text="Eliminar", command=lambda: get_id(tv, window))
+    btn_leer = tk.Button(window, text="Eliminar", command=lambda: delete(tv))
     btn_leer.grid(row=3, column=2, pady=10)
 
     # Botón para refrescar los datos de la tabla
