@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 from services.crud import listar_productos
 from services.crud import delete_producto
 
@@ -20,10 +21,18 @@ def refresh_table(tv):
 def get_id(tv):
     '''Tomo el id_producto del elemento seleccionado en la lista de la tabla.'''    
     seleccion = tv.selection()
-    item = seleccion[0]
-    item_values = tv.item(item, 'values')
-    id = item_values[0]
-    return id
+
+    if seleccion:
+        item = seleccion[0]
+        item_values = tv.item(item, 'values')
+        id = item_values[0]
+        return id
+    
+    else:
+        # Despliego el msg de alerta
+        messagebox.showerror("Error", "Debe seleccionar un registro para poder borrarlo")        
+
+    
 
 
 
@@ -31,12 +40,13 @@ def delete(tv):
     '''Método para eliminar el registro seleccionado.'''
     # Invoco al método para obtener el id
     id = get_id(tv=tv)
-    
-    #Invoco al método para eliminar el producto por id_producto
-    delete_producto(id_producto=id)
 
-    # Invoco al método refresh para actualizar los datos de la tabla
-    refresh_table(tv=tv)
+    if id:
+        #Invoco al método para eliminar el producto por id_producto
+        delete_producto(id_producto=id)
+
+        # Invoco al método refresh para actualizar los datos de la tabla
+        refresh_table(tv=tv)
 
 
 
