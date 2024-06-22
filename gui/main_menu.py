@@ -8,7 +8,7 @@ def main_menu():
     
     # Crear la ventana principal del menu
     window = tk.Tk()
-    window.title("Menu principal")
+    window.title("Gestión de productos")
     window.geometry("1225x600")
     window.resizable(width=False, height=False)
     window['bg'] = '#b0c6ff'
@@ -17,23 +17,18 @@ def main_menu():
     # Cargo las columnas 
     columns = ("id_producto", "nombre_producto", "precio", "descripcion","stock", "id_marca")
     
+    # Genero la tabla
     tv = ttk.Treeview(window, columns = columns, show="headings")
     tv.pack()
 
-    tv.heading ('id_producto', text='id_producto', anchor=tk.CENTER)
-    tv.heading ('nombre_producto', text="nombre_producto", anchor=tk.CENTER)
-    tv.heading ('precio', text="precio", anchor=tk.CENTER)
-    tv.heading ('descripcion', text='descripcion', anchor=tk.CENTER)
-    tv.heading ('stock', text="stock", anchor=tk.CENTER)
-    tv.heading ('id_marca', text="id_marca", anchor=tk.CENTER)
-    
-    tv.column  ('id_producto', anchor='e')
-    tv.column  ('nombre_producto', anchor='e')
-    tv.column  ('precio', anchor='e')
-    tv.column  ('descripcion', anchor='e')
-    tv.column  ('stock', anchor='e')
-    tv.column  ('id_marca', anchor='e')
+    # Recorro la lista de columnas para generar dinámicamente los encabezados
+    for head in columns:
+        tv.heading (head, text=head, anchor=tk.CENTER)
 
+    # Recorro la lista de columnas para generar las columnas dinámicamente en la tabla
+    for column in columns:
+        tv.column  (column, anchor='e')
+    
     # Recorro la lista de productos para insertar los valores dinámicamente en la tabla
     for producto in productos:
         tv.insert ('', tk.END, values = (producto))
