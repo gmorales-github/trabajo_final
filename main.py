@@ -37,6 +37,7 @@ window = tk.Tk()
 window.title("Menu de inicio")
 window.geometry("410x300")
 window.resizable(width=False, height=False)
+window['bg'] = '#b0c6ff'
 
 # Crear y colocar etiquetas y entradas de texto
 label_username = tk.Label(window, text="Usuario")
