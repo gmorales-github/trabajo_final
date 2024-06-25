@@ -88,9 +88,6 @@ def autenticar(user, password):
         return False
     
     
-    
-
-
 
 def listar_productos():
     '''Método para obtener todos los registros de la tabla productos.'''
@@ -142,3 +139,28 @@ def delete_producto(id_producto):
         # Cierro el cursor y la conexión
         cursor.close()
         conexion_mysql.close()
+
+
+
+def listar_ventas():
+    '''Método para obtener todos los registros de la tabla ventas.'''
+    # Realizó la conexión con la DB según los datos de configuración
+    conexion_mysql = conexionDB(USER_DB_SERVER, PASSWORD_DB_SERVER, IP_DB_SERVER, DB_SCHEMA)
+
+    # creo el cursor
+    cursor = conexion_mysql.cursor()
+
+    # Generó un query para validar el ingreso a la plataforma
+    sales_query =  SALES_QUERY 
+    
+    # Ejecuto el query indicado
+    cursor.execute(sales_query)
+    
+    # Guardo los resultados del query
+    sales_data = cursor.fetchall()
+
+    # Cierro las conexiones
+    conexion_mysql.close()
+    cursor.close()
+
+    return sales_data
