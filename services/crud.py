@@ -141,6 +141,34 @@ def delete_producto(id_producto):
         conexion_mysql.close()
 
 
+def save_product(nombre_producto, precio, descripcion, stock):
+    '''Método para eliminar un producto mediante su id'''
+    try:
+        # Realizo la conexión con la DB según los datos de configuración
+        conexion_mysql = conexionDB(USER_DB_SERVER, PASSWORD_DB_SERVER, IP_DB_SERVER, DB_SCHEMA)
+
+        # Creo el cursor
+        cursor = conexion_mysql.cursor()
+
+        # Genero un query para guardar el producto nuevo usando consultas parametrizadas
+        #save_product_query = SAVE_PRODUCTO_QUERY + " %s"
+        save_product_query = SAVE_PRODUCTO_QUERY 
+        
+        # Ejecuto el query indicado
+        cursor.execute(save_product_query, (nombre_producto,precio, descripcion, stock))
+
+        # Hago commit de la transacción
+        conexion_mysql.commit()
+
+    except Exception as e:
+        print("Ocurrió un error:", e)
+    
+    finally:
+        # Cierro el cursor y la conexión
+        cursor.close()
+        conexion_mysql.close()
+
+
 
 def listar_ventas():
     '''Método para obtener todos los registros de la tabla ventas.'''

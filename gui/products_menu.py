@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from services.crud import listar_productos
 from services.crud import delete_producto
+from gui.add_product_menu import new_product
 
 
 def refresh_table(tv):
@@ -50,7 +51,9 @@ def delete(tv):
 
 
 
-def products_menu():
+def products_menu(window):
+    # Elimino la ventana menu principal
+    window.destroy()
     # Obtengo la lista de todos los productos
     productos = listar_productos()
     
@@ -83,7 +86,7 @@ def products_menu():
     tv.grid(row=0, column=2, padx=10, pady=10)
     
     # Botón para agregar un nuevo producto
-    btn_leer = tk.Button(window, text="Nuevo", command=lambda: get_id(tv))
+    btn_leer = tk.Button(window, text="Nuevo", command=lambda: new_product(tv))
     btn_leer.grid(row=1, column=2, pady=10)
     
     # Botón para editar el registro seleccionado

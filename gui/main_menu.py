@@ -14,15 +14,15 @@ def main_menu():
     window['bg'] = '#b0c6ff'
 
     # Botón para ingresar a la gestión de productos
-    btn_leer = tk.Button(window, text="Gestión de productos", command=lambda: products_menu())
+    btn_leer = tk.Button(window, text="Gestión de productos", command=lambda: products_menu(window))
     btn_leer.grid(row=1, column=3, pady=10, padx=200)
     
     # Botón para ingresar a la gestión de ventas
-    btn_leer = tk.Button(window, text="Gestión de ventas", command=lambda: sales_menu())
+    btn_leer = tk.Button(window, text="Gestión de ventas", command=lambda: sales_menu(window))
     btn_leer.grid(row=2, column=3, pady=0, padx=0)
 
     # Botón para ingresar a la sección ganancias
-    btn_leer = tk.Button(window, text="Ganancias", command=lambda: profits_menu())
+    btn_leer = tk.Button(window, text="Ganancias", command=lambda: profits_menu(window))
     btn_leer.grid(row=3, column=3, pady=10, padx=0)
 
     # Botón para salir de la app

@@ -19,8 +19,7 @@ def login():
         # Elimino la ventana de login
         window.destroy()
         # Ingreso al menu principal
-        main_menu()
-        #products_menu()        
+        main_menu()                
         
 
     else:

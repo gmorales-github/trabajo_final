@@ -31,7 +31,9 @@ def get_id(tv):
         # Despliego el msg de alerta
         messagebox.showerror("Error", "Debe seleccionar un registro para poder borrarlo")        
 
-def sales_menu():
+def sales_menu(window):
+    # Elimino la ventana menu principal
+    window.destroy()
     # Obtengo la lista de todos los productos
     ventas = listar_ventas()
     
@@ -69,11 +71,15 @@ def sales_menu():
     
     # Botón para refrescar los datos de la tabla
     btn_refrescar = tk.Button(window, text="Actualizar", command=lambda: refresh_table(tv))
-    btn_refrescar.grid(row=4, column=2, pady=10)    
+    btn_refrescar.grid(row=2, column=2, pady=10)
+
+    # Botón para volver al menu principal
+    btn_refrescar = tk.Button(window, text="Menu principal", command=lambda: main_menu(tv))
+    btn_refrescar.grid(row=3, column=2, pady=10)    
 
     # Botón para salir de la app
     btn_exit = tk.Button(window, text="Salir", command=exit)
-    btn_exit.grid(row=5, column=2, pady=10)
+    btn_exit.grid(row=4, column=2, pady=10)
 
     # Ejecutar la aplicación
     window.mainloop()
