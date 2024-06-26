@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-from services.crud import listar_productos
-from services.crud import delete_producto
+from services.crud import listar_productos, delete_producto
 from gui.add_product_menu import new_product
+from gui.update_product_menu import update_product
 
 
 def refresh_table(tv):
@@ -33,7 +33,28 @@ def get_id(tv):
         # Despliego el msg de alerta
         messagebox.showerror("Error", "Debe seleccionar un registro para poder borrarlo")        
 
+def get_data_product(tv):
+    '''Obtengo los datos del elemento seleccionado en la lista de la tabla.'''    
+    seleccion = tv.selection()
+
+    if seleccion:
+        item = seleccion[0]
+        item_values = tv.item(item, 'values')
+        return item_values
     
+    else:
+        # Despliego el msg de alerta
+        messagebox.showerror("Error", "Debe seleccionar un registro para poder editarlo")
+        
+    
+def update_product_menu(tv):
+    # Cargo la variable data con el contenido del registro del producto de la lista
+    data = get_data_product(tv)
+
+    if data:
+        # Invoco al menu editar producto
+        update_product(tv, data)
+
 
 
 
@@ -84,13 +105,14 @@ def products_menu(window):
         tv.insert('', tk.END, values=producto)
     
     tv.grid(row=0, column=2, padx=10, pady=10)
-    
+
+        
     # Botón para agregar un nuevo producto
     btn_leer = tk.Button(window, text="Nuevo", command=lambda: new_product(tv))
     btn_leer.grid(row=1, column=2, pady=10)
     
-    # Botón para editar el registro seleccionado
-    btn_leer = tk.Button(window, text="Editar", command=lambda: get_id(tv))
+    # Botón para editar el producto seleccionado
+    btn_leer = tk.Button(window, text="Editar", command=lambda: update_product_menu(tv))
     btn_leer.grid(row=2, column=2, pady=10)
     
     # Botón para eliminar el registro seleccionado
