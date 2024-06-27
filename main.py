@@ -29,10 +29,6 @@ def login():
     
     
 
-def exit():
-    '''Método para el botón salir'''
-    quit()
-
 # Crear la ventana principal
 window = tk.Tk()
 window.title("Menu de inicio")
