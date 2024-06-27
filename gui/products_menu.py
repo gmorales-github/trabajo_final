@@ -72,7 +72,7 @@ def delete(tv):
 
 
 
-def products_menu(window):
+def products_menu(window, admin):
     # Elimino la ventana menu principal
     window.destroy()
     # Obtengo la lista de todos los productos
@@ -106,19 +106,37 @@ def products_menu(window):
     
     tv.grid(row=0, column=2, padx=10, pady=10)
 
-        
-    # Botón para agregar un nuevo producto
-    btn_leer = tk.Button(window, text="Nuevo", command=lambda: new_product(tv))
-    btn_leer.grid(row=1, column=2, pady=10)
+    # Según los permisos limito las acciones de los usuarios. admin = 1  
+    if admin == 1:
+        # Botón para agregar un nuevo producto
+        btn_product = tk.Button(window, text="Nuevo", command=lambda: new_product(tv))
+        btn_product.grid(row=1, column=2, pady=10)
     
-    # Botón para editar el producto seleccionado
-    btn_leer = tk.Button(window, text="Editar", command=lambda: update_product_menu(tv))
-    btn_leer.grid(row=2, column=2, pady=10)
+        # Botón para editar el producto seleccionado
+        btn_edit = tk.Button(window, text="Editar", command=lambda: update_product_menu(tv))
+        btn_edit.grid(row=2, column=2, pady=10)
     
-    # Botón para eliminar el registro seleccionado
-    btn_leer = tk.Button(window, text="Eliminar", command=lambda: delete(tv))
-    btn_leer.grid(row=3, column=2, pady=10)
+        # Botón para eliminar el registro seleccionado
+        btn_delete = tk.Button(window, text="Eliminar", command=lambda: delete(tv))
+        btn_delete.grid(row=3, column=2, pady=10)
 
+    else:
+        #config(state='disabled')
+        # Botón para agregar un nuevo producto
+        btn_product = tk.Button(window, text="Nuevo", command=lambda: new_product(tv))
+        btn_product.grid(row=1, column=2, pady=10)
+        btn_product.config(state='disabled')
+    
+        # Botón para editar el producto seleccionado
+        btn_edit = tk.Button(window, text="Editar", command=lambda: update_product_menu(tv))
+        btn_edit.grid(row=2, column=2, pady=10)
+        btn_edit.config(state='disabled')
+    
+        # Botón para eliminar el registro seleccionado
+        btn_delete = tk.Button(window, text="Eliminar", command=lambda: delete(tv))
+        btn_delete.grid(row=3, column=2, pady=10)
+        btn_delete.config(state='disabled')
+    
     # Botón para refrescar los datos de la tabla
     btn_refrescar = tk.Button(window, text="Actualizar", command=lambda: refresh_table(tv))
     btn_refrescar.grid(row=4, column=2, pady=10)    
