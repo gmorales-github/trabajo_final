@@ -86,7 +86,36 @@ def autenticar(user, password):
         cursor.close()
         
         return False
+
+
+def obtener_permiso(user):
+    '''Realiza el proceso de obtención de los valores de la columna admin'''
+    # Realizó la conexión con la DB según los datos de configuración
+    conexion_mysql = conexionDB(USER_DB_SERVER, PASSWORD_DB_SERVER, IP_DB_SERVER, DB_SCHEMA)
+
+    # creo el cursor
+    cursor = conexion_mysql.cursor()
+
+    # Generó un query para obtener el campo de los permisos a la plataforma
+    permissions_value_query = PERMISSIONS_VALUE_QUERY + " " + "\"" + user + "\"" 
     
+    # Ejecuto el query indicado
+    cursor.execute(permissions_value_query)
+    
+    # Guardo los resultados del query
+    permissions_value = cursor.fetchall()
+
+    # Extraigo el valor de la contraseñia y el valor del campo admin
+    for permissions in permissions_value:            
+        admin_value = permissions
+
+    # Cierro las conexiones
+    conexion_mysql.close()
+    cursor.close()
+            
+    return admin_value
+
+
     
 
 def listar_productos():

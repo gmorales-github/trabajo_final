@@ -4,6 +4,7 @@ from tkinter import messagebox
 from services.crud import listar_productos, delete_producto
 from gui.add_product_menu import new_product
 from gui.update_product_menu import update_product
+from services.crud import obtener_permiso
 
 
 def refresh_table(tv):
@@ -72,11 +73,16 @@ def delete(tv):
 
 
 
-def products_menu(window, admin):
+def products_menu(window, user):
+    '''Método que genera la ventana del menu producto'''
     # Elimino la ventana menu principal
     window.destroy()
     # Obtengo la lista de todos los productos
     productos = listar_productos()
+    
+    # Obtengo los permisos del usuario
+    admin_value = obtener_permiso(user=user)
+
     
     # Crear la ventana principal del menu
     window = tk.Tk()
@@ -106,8 +112,8 @@ def products_menu(window, admin):
     
     tv.grid(row=0, column=2, padx=10, pady=10)
 
-    # Según los permisos limito las acciones de los usuarios. admin = 1  
-    if admin == 1:
+    # Según los permisos limito las acciones de los usuarios. admin = 1
+    if admin_value[0] == 1:
         # Botón para agregar un nuevo producto
         btn_product = tk.Button(window, text="Nuevo", command=lambda: new_product(tv))
         btn_product.grid(row=1, column=2, pady=10)

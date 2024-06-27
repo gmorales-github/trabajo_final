@@ -4,7 +4,7 @@ from gui.sales_menu import sales_menu
 
 
 
-def main_menu():    
+def main_menu(user):        
     # Crear la ventana principal del menu
     window = tk.Tk()
     window.title("Menu principal")
@@ -13,7 +13,7 @@ def main_menu():
     window['bg'] = '#b0c6ff'
 
     # Botón para ingresar a la gestión de productos
-    btn_leer = tk.Button(window, text="Gestión de productos", command=lambda: products_menu(window, admin=1))
+    btn_leer = tk.Button(window, text="Gestión de productos", command=lambda: products_menu(window, user))
     btn_leer.grid(row=1, column=3, pady=10, padx=200)
     
     # Botón para ingresar a la gestión de ventas

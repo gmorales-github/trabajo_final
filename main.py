@@ -15,11 +15,15 @@ def main():
 # Función que se ejecuta al presionar el botón de login
 def login():
     '''Función que permite enviar la credeenciales a la DB para su validación'''
+    # Cargo el usuario en un variable
+    user = entry_username.get()
+    
     if autenticar(user=entry_username.get(), password=entry_password.get()):        
         # Elimino la ventana de login
         window.destroy()
-        # Ingreso al menu principal
-        main_menu()
+        
+        # Ingreso al menu principal        
+        main_menu(user=user)
                 
         
 
