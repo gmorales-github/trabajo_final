@@ -2,8 +2,7 @@ import tkinter as tk
 from gui.products_menu import products_menu
 from gui.sales_menu import sales_menu
 
-def get_id():
-    pass
+
 
 def main_menu():    
     # Crear la ventana principal del menu
